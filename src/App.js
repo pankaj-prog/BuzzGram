@@ -31,7 +31,7 @@ function App() {
         <Route path="home" element={<Home />} />
         <Route path="profile" element={<Profile />} />
         <Route path="explore" element={<Explore />} />
-        <Route path="bookmarks" element={<Bookmark />} />
+        <Route path="bookmark" element={<Bookmark />} />
         <Route path="notification" element={<Notification />} />
       </Route>
       <Route element={<AuthRoutes />}>

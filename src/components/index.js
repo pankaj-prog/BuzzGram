@@ -1,2 +1,5 @@
 export { default as AuthRoutes } from "./AuthRoutes/AuthRoutes";
 export { default as UserRoutes } from "./UserRoutes/UserRoutes";
+export { default as IconButton } from "./IconButton/IconButton";
+export { default as Post } from "./Post/Post";
+export { default as Header } from "./Header/Header";
