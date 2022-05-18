@@ -1,0 +1,37 @@
+.profile-wrapper {
+  padding: 8px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.profile-wrapper .avatar {
+  width: 5rem;
+  height: 5rem;
+}
+
+.profile-wrapper button {
+  flex-shrink: 0;
+}
+
+.profile-wrapper .user-info {
+  display: flex;
+  gap: 1.8rem;
+}
+
+.posts-type-wrapper {
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  background-color: var(--COLOR-SECONDARY);
+  gap: 1rem;
+}
+
+.posts-type-wrapper .btn {
+  padding: 8px;
+}
+
+.post-type-selected {
+  border-top: 3px solid var(--COLOR-PRIMARY);
+}

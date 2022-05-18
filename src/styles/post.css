@@ -7,8 +7,8 @@
 }
 
 .post .avatar {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 2rem;
+  height: 2rem;
 }
 
 .post-header,
@@ -19,11 +19,13 @@
 }
 
 .post-user-details {
+  align-items: center;
   display: flex;
-  gap: 8px;
+  gap: 12px;
 }
 
 .post-img {
+  cursor: pointer;
   border-radius: 1rem;
   width: 100%;
   object-fit: cover;
@@ -34,4 +36,52 @@
   display: flex;
   justify-content: flex-end;
   gap: 8px;
+}
+
+.post-content .btn {
+  padding: 0;
+}
+
+/* post page */
+
+.comments-section {
+  background-color: var(--COLOR-SECONDARY);
+  border-radius: 1rem;
+}
+
+.comment-input-wrapper {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+}
+
+.comment-input {
+  padding: 8px;
+  flex-grow: 1;
+  outline: thin transparent;
+  border-radius: 8px;
+  border: 1px solid var(--COLOR-SECONDARY-V3);
+  background-color: var(--COLOR-SECONDARY-V2);
+}
+
+.comments-list-wrapper {
+  display: block;
+  padding: 1rem;
+}
+
+.comment-wrapper {
+  border-bottom: 1px solid var(--COLOR-SECONDARY-V3);
+  padding: 8px 0;
+  display: flex;
+  gap: 1rem;
+}
+
+.comment-wrapper .avatar img {
+  max-width: initial;
+  width: 2rem;
+  height: 2rem;
+}
+
+.comment {
+  margin-left: 8px;
 }

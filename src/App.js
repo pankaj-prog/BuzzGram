@@ -7,10 +7,9 @@ import {
   Login,
   Signup,
   Explore,
-  Bookmark,
-  Notification,
   Profile,
   Page404,
+  PostPage,
 } from "pages";
 
 import { UserRoutes, AuthRoutes } from "components";
@@ -31,8 +30,7 @@ function App() {
         <Route path="home" element={<Home />} />
         <Route path="profile" element={<Profile />} />
         <Route path="explore" element={<Explore />} />
-        <Route path="bookmark" element={<Bookmark />} />
-        <Route path="notification" element={<Notification />} />
+        <Route path="post/:postID" element={<PostPage />} />
       </Route>
       <Route element={<AuthRoutes />}>
         <Route path="/login" element={<Login />} />
