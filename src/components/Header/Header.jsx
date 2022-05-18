@@ -1,8 +1,6 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-
+import { NavLink, useNavigate } from "react-router-dom";
 import {
-  FiBookmark,
   AiOutlinePlus,
   AiOutlineHome,
   MdOutlineExplore,
@@ -10,11 +8,15 @@ import {
 } from "assets/icons";
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <div className="app-header-wrapper gutter-bottom-24">
       <header className="app-header">
         <h3 className="app-name">BuzzGram</h3>
-        <button className="btn btn-solid-primary btn-rc">
+        <button
+          onClick={() => navigate("/newpost")}
+          className="btn btn-solid-primary btn-rc"
+        >
           <AiOutlinePlus /> Post
         </button>
         <nav className="nav-wrapper">

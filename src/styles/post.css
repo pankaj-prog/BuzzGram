@@ -42,6 +42,10 @@
   padding: 0;
 }
 
+.caption {
+  white-space: pre-line;
+}
+
 /* post page */
 
 .comments-section {
@@ -84,4 +88,5 @@
 
 .comment {
   margin-left: 8px;
+  white-space: pre-line;
 }

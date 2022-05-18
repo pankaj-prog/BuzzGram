@@ -5,3 +5,4 @@ export { default as Login } from "./auth/Login";
 export { default as Signup } from "./auth/Signup";
 export { default as Page404 } from "./Page404/Page404";
 export { default as PostPage } from "./PostPage/PostPage";
+export { default as NewPost } from "./NewPost/NewPost";

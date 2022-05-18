@@ -46,7 +46,7 @@ const Post = () => {
       </section>
       <section className="post-content">
         <h5>Pankaj Wadhwani</h5>
-        <p className="gutter-bottom-8">
+        <p className="gutter-bottom-8 caption">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure quae,
           perferendis sapiente porro dolore obcaecati accusamus deleniti ab illo
           rem.
