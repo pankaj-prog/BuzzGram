@@ -1,0 +1,97 @@
+@import url("https://adaptiveui.netlify.app/src/components/ui-lib.css");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("styles/post.css");
+/* reset */
+:root {
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+/* util classes */
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.gutter-bottom-8 {
+  margin-bottom: 0.5rem;
+}
+
+.gutter-bottom-16 {
+  margin-bottom: 1rem;
+}
+
+.gutter-bottom-24 {
+  margin-bottom: 1.5rem;
+}
+
+.gutter-bottom-32 {
+  margin-bottom: 2rem;
+}
+
+/* buttons */
+
+.btn {
+  transition: background-color 0.6s ease;
+}
+
+.btn-solid-primary:hover {
+  background-color: var(--COLOR-PRIMARY-V2);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--COLOR-SECONDARY-V2);
+}
+
+.btn-outline-primary {
+  background-color: var(--COLOR-SECONDARY);
+}
+
+.btn-solid-secondary:hover {
+  background-color: var(--COLOR-SECONDARY-V3);
+}
+
+.icon-btn-wrapper {
+  position: relative;
+}
+
+.icon-btn-wrapper .btn {
+  padding: 4px;
+}
+
+.icon-btn-wrapper .name {
+  display: none;
+  opacity: 0;
+  background-color: var(--COLOR-SECONDARY-V3);
+  border-radius: 2px;
+  position: absolute;
+  top: 3rem;
+  right: 0;
+  min-width: 100%;
+  padding: 0 6px;
+  text-align: center;
+  transition: opacity 0.6s ease;
+}
+
+.icon-btn-wrapper:hover .name {
+  display: inline-block;
+  opacity: 1;
+}
+
+/* max-width */
+
+.max-width {
+  max-width: 62.5rem;
+  margin: 0 auto;
+  padding: 0 8px;
+}

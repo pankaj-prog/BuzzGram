@@ -1,0 +1,37 @@
+.post {
+  background-color: var(--COLOR-SECONDARY);
+  padding: 1rem;
+  border-radius: 1rem;
+  max-width: 30rem;
+  border: 1px solid var(--COLOR-SECONDARY-V3);
+}
+
+.post .avatar {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.post-header,
+.post-status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-user-details {
+  display: flex;
+  gap: 8px;
+}
+
+.post-img {
+  border-radius: 1rem;
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 3/2;
+}
+
+.post-actions-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}

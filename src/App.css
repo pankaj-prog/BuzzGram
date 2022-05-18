@@ -1,0 +1,29 @@
+.app {
+  background-color: var(--COLOR-SECONDARY-V2);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+}
+
+.app-header-wrapper {
+  background-color: var(--COLOR-SECONDARY);
+  border-bottom: 1px solid var(--COLOR-SECONDARY-V3);
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+}
+
+.app-body {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-wrapper {
+  display: flex;
+  gap: 1.4rem;
+}
