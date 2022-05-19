@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { FileUploader } from "react-drag-drop-files";
 
 const fileTypes = ["JPEG", "PNG", "GIF"];
@@ -6,8 +7,44 @@ const fileTypes = ["JPEG", "PNG", "GIF"];
 const NewPost = () => {
   const [caption, setCaption] = useState("");
   const [selectedImage, setSelectedImage] = useState();
+  const [imgUrl, setImgUrl] = useState(null);
+
   const fileChangeHandler = (selectedImage) => {
     setSelectedImage(selectedImage);
+  };
+
+  const uploadImage = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", selectedImage);
+    formData.append("upload_preset", "zjjg1gak");
+
+    fetch("https://api.cloudinary.com/v1_1/dl0nhw7w3/image/upload", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((data) => {
+        setImgUrl(data.secure_url);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // const res = await axios.post(
+    //   "https://api.cloudinary.com/v1_1/dl0nhw7w3/image/upload",
+    //   formData
+    // );
+    // console.log("res", res);
+    // const { data } = await res;
+    // setImgUrl(data.secure_url);
+    // } catch (err) {
+    //   console.log(err);
+    // } finally {
+    //   console.log("end");
+    // }
   };
 
   return (
@@ -27,28 +64,32 @@ const NewPost = () => {
           {selectedImage
             ? `Image: ${selectedImage?.name}`
             : "No image uploaded yet"}{" "}
-          <button className="btn btn-solid-primary btn-rc add-image-btn ">
+          <button
+            onClick={uploadImage}
+            className="btn btn-solid-primary btn-rc add-image-btn "
+          >
             Add image
           </button>
         </p>
         <textarea
           className="caption-input"
-          placeholder="enter caption..."
+          placeholder="Share what you think..."
           value={caption}
-          rows="1"
+          rows="4"
           onChange={(e) => {
+            // to change the height of text area based on input text
             e.target.style.height = "inherit";
             e.target.style.height = `${e.target.scrollHeight}px`;
             setCaption(e.target.value);
           }}
         ></textarea>
       </form>
-      <h5 className="text-center gutter-bottom-8">Preview below</h5>
+      <p className="text-center text-muted gutter-bottom-8">Post Preview...</p>
       <div className="post gutter-bottom-8">
-        {selectedImage ? (
+        {imgUrl ? (
           <img
             className="responsive-img post-img gutter-bottom-8"
-            src={""}
+            src={imgUrl}
             alt="post-img"
           />
         ) : (
@@ -61,10 +102,15 @@ const NewPost = () => {
         {caption ? (
           <p className="caption">{caption}</p>
         ) : (
-          <p className="text-center caption">your caption here</p>
+          <p className="caption text-muted">your caption here...</p>
         )}
       </div>
-      <button className="btn btn-solid-primary btn-rc">Create post</button>
+      <button
+        className="btn btn-solid-primary btn-rc"
+        disabled={caption ? false : true}
+      >
+        Create post
+      </button>
     </section>
   );
 };

@@ -51,7 +51,7 @@ const Post = () => {
           perferendis sapiente porro dolore obcaecati accusamus deleniti ab illo
           rem.
         </p>
-        {!currLocation.pathname == "/post/:postID" && (
+        {!(currLocation.pathname == "/post/:postID") && (
           <button
             onClick={() => navigate("/post/id")}
             className="text-muted btn fw-r"
