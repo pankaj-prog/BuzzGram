@@ -14,7 +14,7 @@
 .caption-input {
   font-family: "Roboto", sans-serif;
   border-radius: 1rem;
-  height: 2rem;
+  resize: none;
   padding: 8px;
   display: block;
   width: 100%;

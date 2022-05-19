@@ -25,6 +25,7 @@ import {
   unfollowUserHandler,
   editUserHandler,
 } from "./backend/controllers/UserController";
+import axios from "axios";
 
 export function makeServer({ environment = "development" } = {}) {
   return new Server({
@@ -86,6 +87,9 @@ export function makeServer({ environment = "development" } = {}) {
       this.post(
         "/users/unfollow/:followUserId/",
         unfollowUserHandler.bind(this)
+      );
+      this.passthrough(
+        "https://api.cloudinary.com/v1_1/dl0nhw7w3/image/upload"
       );
     },
   });

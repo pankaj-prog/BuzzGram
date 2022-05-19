@@ -65,6 +65,11 @@ body {
   background-color: var(--COLOR-SECONDARY-V3);
 }
 
+.btn-solid-primary:disabled {
+  cursor: not-allowed;
+  background-color: var(--COLOR-SECONDARY-V3);
+}
+
 .icon-btn-wrapper {
   position: relative;
 }
