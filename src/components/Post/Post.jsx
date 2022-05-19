@@ -24,7 +24,7 @@ const Post = () => {
         </div>
         <button className="btn">follow +</button>
       </header>
-      {/* <section className="img-wrapper ">
+      <section className="img-wrapper ">
         <img
           onClick={() => navigate("/post/id")}
           cursor="pointer"
@@ -32,14 +32,6 @@ const Post = () => {
           src="https://images.unsplash.com/photo-1652767935209-e0bf66690fb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNnx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
           alt=""
         />
-      </section> */}
-      <section className="post-content">
-        {/* <h5>Pankaj Wadhwani</h5> */}
-        <p className="gutter-bottom-8 caption">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure quae,
-          perferendis sapiente porro dolore obcaecati accusamus deleniti ab illo
-          rem.
-        </p>
       </section>
       <section className="post-status-bar">
         <span>3 Likes</span>
