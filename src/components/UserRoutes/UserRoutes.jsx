@@ -6,7 +6,7 @@ const UserRoutes = () => {
   return (
     <div className="app">
       <Header />
-      <main className="max-width app-body">
+      <main className="app-body">
         <Outlet />
       </main>
     </div>

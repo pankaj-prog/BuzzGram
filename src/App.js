@@ -7,23 +7,24 @@ import {
   Login,
   Signup,
   Explore,
-  Bookmark,
-  Notification,
   Profile,
   Page404,
+  PostPage,
+  NewPost,
 } from "pages";
 
 import { UserRoutes, AuthRoutes } from "components";
 
 function App() {
   const navigate = useNavigate();
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    if (location.pathname == "/") {
+    window.scrollTo(0, 0);
+    if (pathname == "/") {
       navigate("/home", { replace: true });
     }
-  }, []);
+  }, [pathname]);
 
   return (
     <Routes>
@@ -31,8 +32,8 @@ function App() {
         <Route path="home" element={<Home />} />
         <Route path="profile" element={<Profile />} />
         <Route path="explore" element={<Explore />} />
-        <Route path="bookmark" element={<Bookmark />} />
-        <Route path="notification" element={<Notification />} />
+        <Route path="post/:postID" element={<PostPage />} />
+        <Route path="newpost" element={<NewPost />} />
       </Route>
       <Route element={<AuthRoutes />}>
         <Route path="/login" element={<Login />} />
