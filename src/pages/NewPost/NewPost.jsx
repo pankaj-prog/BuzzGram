@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { FileUploader } from "react-drag-drop-files";
 
 const fileTypes = ["JPEG", "PNG", "GIF"];
@@ -17,14 +16,13 @@ const NewPost = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", selectedImage);
-    formData.append("upload_preset", "zjjg1gak");
+    formData.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
 
     fetch("https://api.cloudinary.com/v1_1/dl0nhw7w3/image/upload", {
       method: "POST",
       body: formData,
     })
       .then((response) => {
-        console.log(response);
         return response.json();
       })
       .then((data) => {
