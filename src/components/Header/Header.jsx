@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   AiOutlinePlus,
@@ -6,8 +6,17 @@ import {
   MdOutlineExplore,
   AiOutlineUser,
 } from "assets/icons";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "redux/reducers/authSlice";
 
 const Header = () => {
+  const [showUserWrapper, setShowUserWrapper] = useState();
+
+  const dispatch = useDispatch();
+  const logoutHandler = () => {
+    dispatch(logoutUser());
+  };
+
   const navigate = useNavigate();
   return (
     <div className="app-header-wrapper gutter-bottom-24">
@@ -26,9 +35,19 @@ const Header = () => {
           <NavLink to="/explore" className="btn-lg link">
             <MdOutlineExplore />
           </NavLink>
-          <NavLink to="/profile" className="btn-lg link">
-            <AiOutlineUser />
-          </NavLink>
+          <div className="user-btn-wrapper">
+            <button className="btn user-btn btn-lg link">
+              <AiOutlineUser />
+            </button>
+            <div className="user-wrapper">
+              <button className="btn" onClick={() => navigate("/profile")}>
+                My profile
+              </button>
+              <button className="btn" onClick={logoutHandler}>
+                Logout
+              </button>
+            </div>
+          </div>
         </nav>
       </header>
     </div>

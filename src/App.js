@@ -14,6 +14,9 @@ import {
 } from "pages";
 
 import { UserRoutes, AuthRoutes } from "components";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const navigate = useNavigate();
@@ -27,20 +30,23 @@ function App() {
   }, [pathname]);
 
   return (
-    <Routes>
-      <Route path="/" element={<UserRoutes />}>
-        <Route path="home" element={<Home />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="explore" element={<Explore />} />
-        <Route path="post/:postID" element={<PostPage />} />
-        <Route path="newpost" element={<NewPost />} />
-      </Route>
-      <Route element={<AuthRoutes />}>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-      </Route>
-      <Route path="*" element={<Page404 />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<UserRoutes />}>
+          <Route path="home" element={<Home />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="explore" element={<Explore />} />
+          <Route path="post/:postID" element={<PostPage />} />
+          <Route path="newpost" element={<NewPost />} />
+        </Route>
+        <Route element={<AuthRoutes />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Route>
+        <Route path="*" element={<Page404 />} />
+      </Routes>
+      <ToastContainer />
+    </>
   );
 }
 
