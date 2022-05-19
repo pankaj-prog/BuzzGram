@@ -33,18 +33,6 @@ const NewPost = () => {
       .catch((err) => {
         console.log(err);
       });
-    // const res = await axios.post(
-    //   "https://api.cloudinary.com/v1_1/dl0nhw7w3/image/upload",
-    //   formData
-    // );
-    // console.log("res", res);
-    // const { data } = await res;
-    // setImgUrl(data.secure_url);
-    // } catch (err) {
-    //   console.log(err);
-    // } finally {
-    //   console.log("end");
-    // }
   };
 
   return (
