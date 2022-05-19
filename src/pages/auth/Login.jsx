@@ -42,7 +42,7 @@ const Login = () => {
     if (isLoggedIn && location?.state?.from?.pathname) {
       navigate(location.state.from.pathname);
     } else if (isLoggedIn) {
-      navigate("/home");
+      navigate("/home", { replace: true });
     }
   }, [isLoggedIn]);
 
