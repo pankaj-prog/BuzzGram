@@ -37,6 +37,35 @@
   gap: 1.4rem;
 }
 
+.nav-wrapper .user-btn-wrapper {
+  position: relative;
+}
+
+.nav-wrapper .user-wrapper {
+  position: absolute;
+  display: none;
+  border-radius: 1rem;
+  background-color: var(--COLOR-SECONDARY);
+  box-shadow: 0 0 6px -2px var(--COLOR-PRIMARY-V3);
+  top: 2rem;
+  right: 0;
+  flex-direction: column;
+  overflow: hidden;
+  width: 8rem;
+}
+
+.user-btn-wrapper:hover .user-wrapper {
+  display: flex;
+}
+
+.user-btn {
+  padding: 0;
+}
+
+.user-wrapper .btn:hover {
+  background-color: var(--COLOR-SECONDARY-V3);
+}
+
 .page-header {
   border-radius: 1rem;
   background-color: var(--COLOR-SECONDARY);
