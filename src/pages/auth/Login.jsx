@@ -37,8 +37,8 @@ const Login = () => {
   const guestLoginHandler = () => {
     dispatch(
       loginUser({
-        username: "adarshbalik",
-        password: "adarshBalik123",
+        username: "guest_user",
+        password: "guest@123",
       })
     );
   };
