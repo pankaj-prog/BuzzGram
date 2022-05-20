@@ -97,7 +97,7 @@ const SignUp = () => {
           <button
             type="button"
             className="auth-btn form-btn btn-rc"
-            onClick={(e) => signUpHandler(e)}
+            onClick={signUpHandler}
           >
             Sign up
           </button>
