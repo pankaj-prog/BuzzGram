@@ -11,7 +11,7 @@ const sign = require("jwt-encode");
 /**
  * This handler handles user signups.
  * send POST Request at /api/auth/signup
- * body contains {firstName, lastName, username, password}
+ * body contains {name, username, password}
  * */
 
 export const signupHandler = function (schema, request) {
@@ -40,6 +40,10 @@ export const signupHandler = function (schema, request) {
       followers: [],
       following: [],
       bookmarks: [],
+      bio: "",
+      profileImage:
+        "https://res.cloudinary.com/dl0nhw7w3/image/upload/v1653049691/avatar-default_n2lxg6.png",
+      website: "",
     };
     const createdUser = schema.users.create(newUser);
     const encodedToken = sign(

@@ -28,9 +28,7 @@ export const signUpUser = createAsyncThunk(
   "auth/signUpUser",
   async (signUpData, { rejectWithValue }) => {
     try {
-      const { data } = axios.post("/api/auth/signup", signUpData);
-      localStorage.setItem("buzzgram-user", JSON.stringify(data.foundUser));
-      localStorage.setItem("buzzgram-token", data.encodedToken);
+      const { data } = await axios.post("/api/auth/signup", signUpData);
       return data;
     } catch (err) {
       return rejectWithValue(err?.response);
@@ -90,7 +88,7 @@ export const authSlice = createSlice({
           JSON.stringify(action.payload.createdUser)
         );
         localStorage.setItem("buzzgram-token", action.payload.encodedToken);
-        toast.success("User creater successfully");
+        toast.success("User created successfully");
       })
       .addCase(signUpUser.rejected, (state, action) => {
         state.loading = false;

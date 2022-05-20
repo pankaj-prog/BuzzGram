@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { signUpUser } from "redux/reducers/authSlice";
 import { validatePassword } from "utils/validatePassword";
 
@@ -19,16 +20,20 @@ const SignUp = () => {
 
   const signUpHandler = () => {
     setIsPasswordValid(true);
-    if (validatePassword(passwordRef.current.value)) {
-      dispatch(
-        signUpUser({
-          name: nameRef.current.value,
-          username: usernameRef.current.value,
-          password: passwordRef.current.value,
-        })
-      );
+    if (nameRef.current.value && usernameRef.current.value) {
+      if (validatePassword(passwordRef.current.value)) {
+        dispatch(
+          signUpUser({
+            name: nameRef.current.value,
+            username: usernameRef.current.value,
+            password: passwordRef.current.value,
+          })
+        );
+      } else {
+        setIsPasswordValid(false);
+      }
     } else {
-      setIsPasswordValid(false);
+      toast.error("Fill all input fields and then signup");
     }
   };
 

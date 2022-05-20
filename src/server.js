@@ -14,6 +14,9 @@ import {
   likePostHandler,
   dislikePostHandler,
   getAllUserPostsHandler,
+  addCommentHandler,
+  addReplyHandler,
+  deleteCommentHandler,
 } from "./backend/controllers/PostController";
 import {
   followUserHandler,
@@ -25,7 +28,6 @@ import {
   unfollowUserHandler,
   editUserHandler,
 } from "./backend/controllers/UserController";
-import axios from "axios";
 
 export function makeServer({ environment = "development" } = {}) {
   return new Server({
@@ -71,9 +73,19 @@ export function makeServer({ environment = "development" } = {}) {
       this.post("/posts/like/:postId", likePostHandler.bind(this));
       this.post("/posts/dislike/:postId", dislikePostHandler.bind(this));
 
+      this.post("/posts/comments/:postId", addCommentHandler.bind(this));
+      this.delete(
+        "/posts/comments/:postId/:commentId",
+        deleteCommentHandler.bind(this)
+      );
+      this.post(
+        "/posts/replies/:postId/:commentId",
+        addReplyHandler.bind(this)
+      );
+
       // user routes (public)
       this.get("/users", getAllUsersHandler.bind(this));
-      this.get("/users/:userId", getUserHandler.bind(this));
+      this.get("/users/:username", getUserHandler.bind(this));
 
       // user routes (private)
       this.post("users/edit", editUserHandler.bind(this));
