@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { loginUser } from "redux/reducers/authSlice";
 import { validatePassword } from "utils/validatePassword";
 
@@ -17,23 +18,27 @@ const Login = () => {
 
   const loginClickHandler = () => {
     setIsPasswordValid(true);
-    if (validatePassword(passwordRef.current.value)) {
-      dispatch(
-        loginUser({
-          username: usernameRef.current.value,
-          password: passwordRef.current.value,
-        })
-      );
+    if (usernameRef.current.value) {
+      if (validatePassword(passwordRef.current.value)) {
+        dispatch(
+          loginUser({
+            username: usernameRef.current.value,
+            password: passwordRef.current.value,
+          })
+        );
+      } else {
+        setIsPasswordValid(false);
+      }
     } else {
-      setIsPasswordValid(false);
+      toast.error("Username should not be empty");
     }
   };
 
   const guestLoginHandler = () => {
     dispatch(
       loginUser({
-        username: "adarshbalika",
-        password: "adarshBalika123",
+        username: "adarshbalik",
+        password: "adarshBalik123",
       })
     );
   };
