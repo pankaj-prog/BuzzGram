@@ -17,10 +17,15 @@ import { UserRoutes, AuthRoutes } from "components";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import { getPosts } from "redux/reducers/postsSlice";
+import { getUsers } from "redux/reducers/usersSlice";
+import { useDispatch } from "react-redux";
 
 function App() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -28,6 +33,11 @@ function App() {
       navigate("/home", { replace: true });
     }
   }, [pathname]);
+
+  useEffect(() => {
+    dispatch(getPosts());
+    dispatch(getUsers());
+  }, []);
 
   return (
     <>

@@ -1,7 +1,10 @@
 import { Post } from "components";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
+  const { posts, fetchingPosts } = useSelector((state) => state.posts);
+
   return (
     <>
       <div className="page-header gutter-bottom-16 border-all-thin ">
@@ -37,8 +40,12 @@ const Profile = () => {
         <button className="btn">Bookmarks</button>
       </section>
       <section className="posts-wrapper">
-        <Post />
-        <Post />
+        {fetchingPosts == "fulfilled" &&
+          (posts.length > 0 ? (
+            posts.map((post) => <Post {...post} />)
+          ) : (
+            <p className="text-center">No posts to show</p>
+          ))}
       </section>
     </>
   );

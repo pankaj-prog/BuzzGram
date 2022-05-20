@@ -27,7 +27,8 @@ export const posts = [
   },
   {
     _id: uuid(),
-    caption: "",
+    caption:
+      "All the statistics in the world can’t measure the warmth of a smile",
     image:
       "https://res.cloudinary.com/dl0nhw7w3/image/upload/v1653049103/smiling_face_wa6jy3.avif",
     likes: {
