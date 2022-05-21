@@ -19,6 +19,23 @@ export const getPosts = createAsyncThunk(
   }
 );
 
+export const createPost = createAsyncThunk(
+  "posts/createPost",
+  async (post, { rejectWithValue }) => {
+    const encodedToken = localStorage.getItem("buzzgram-token");
+    try {
+      const { data } = await axios.post(
+        "/api/posts/",
+        { postData: post },
+        { headers: { authorization: encodedToken } }
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(`${error.response.data.errors}`);
+    }
+  }
+);
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -33,6 +50,19 @@ const postsSlice = createSlice({
         state.posts = action.payload.posts;
       })
       .addCase(getPosts.rejected, (state) => {
+        state.fetchingPosts = "rejected";
+        toast.error(action.payload);
+      })
+      .addCase(createPost.pending, (state, action) => {
+        state.fetchingPosts = "pending";
+      })
+      .addCase(createPost.fulfilled, (state, action) => {
+        state.fetchingPosts = "fulfilled";
+        console.log("fulfilled", action);
+        state.posts = action.payload.posts;
+        toast.success("Post Created successfull");
+      })
+      .addCase(createPost.rejected, (state, action) => {
         state.fetchingPosts = "rejected";
         toast.error(action.payload);
       });

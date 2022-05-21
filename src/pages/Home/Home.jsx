@@ -16,7 +16,7 @@ const Home = () => {
       </section>
       <div className="posts-wrapper">
         {fetchingPosts == "fulfilled" &&
-          (posts.length > 0 ? (
+          (posts?.length > 0 ? (
             posts.map((post) => <Post {...post} />)
           ) : (
             <p className="text-center">No posts to show</p>

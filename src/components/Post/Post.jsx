@@ -18,7 +18,11 @@ const Post = ({ ...params }) => {
             className="avatar avatar-round"
             onClick={() => navigate(`/profile/${username}`)}
           >
-            <img className="responsive-img" src={profile_pic} alt="...." />
+            <img
+              className="responsive-img"
+              src={profile_pic}
+              alt="pofile pic"
+            />
           </span>
           <div onClick={() => navigate(`/profile/${username}`)}>
             <h5 className="user-name">{name}</h5>
@@ -33,7 +37,7 @@ const Post = ({ ...params }) => {
           cursor="pointer"
           className="post-img"
           src={image}
-          alt=""
+          alt="post img"
         />
       </section>
       <section className="post-status-bar">
