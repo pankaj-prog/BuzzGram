@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { createPost } from "redux/reducers/postsSlice";
 
 const fileTypes = ["JPEG", "PNG", "GIF"];
 
@@ -7,6 +10,8 @@ const NewPost = () => {
   const [caption, setCaption] = useState("");
   const [selectedImage, setSelectedImage] = useState();
   const [imgUrl, setImgUrl] = useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const fileChangeHandler = (selectedImage) => {
     setSelectedImage(selectedImage);
@@ -31,6 +36,19 @@ const NewPost = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const createPostHandler = () => {
+    dispatch(
+      createPost({
+        caption,
+        image: imgUrl,
+      })
+    );
+    setSelectedImage(null);
+    setCaption("");
+    setImgUrl(null);
+    navigate("/home");
   };
 
   return (
@@ -93,7 +111,8 @@ const NewPost = () => {
       </div>
       <button
         className="btn btn-solid-primary btn-rc"
-        disabled={caption ? false : true}
+        disabled={caption && imgUrl ? false : true}
+        onClick={createPostHandler}
       >
         Create post
       </button>

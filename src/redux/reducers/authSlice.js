@@ -6,7 +6,7 @@ const initialState = {
   user: JSON.parse(localStorage.getItem("buzzgram-user")) ?? null,
   encodedToken: localStorage.getItem("buzzgram-token") ?? null,
   isLoggedIn: Boolean(localStorage.getItem("buzzgram-token")),
-  loading: false,
+  fetchingUser: "idle",
   error: null,
 };
 
@@ -56,10 +56,10 @@ export const authSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(loginUser.pending, (state) => {
-        state.loading = true;
+        state.fetchingUser = "pending";
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.loading = false;
+        state.fetchingUser = "fulfilled";
         state.user = action.payload.foundUser;
         state.encodedToken = action.payload.encodedToken;
         state.isLoggedIn = true;
@@ -71,15 +71,15 @@ export const authSlice = createSlice({
         toast.success("Login Successful");
       })
       .addCase(loginUser.rejected, (state, action) => {
-        state.loading = false;
+        state.fetchingUser = "rejected";
         state.error = action.payload;
         toast.error(action.payload);
       })
       .addCase(signUpUser.pending, (state) => {
-        state.loading = true;
+        state.fetchingUser = "pending";
       })
       .addCase(signUpUser.fulfilled, (state, action) => {
-        state.loading = false;
+        state.fetchingUser = "fulfilled";
         state.user = action.payload.createdUser;
         state.encodedToken = action.payload.encodedToken;
         state.isLoggedIn = true;
@@ -91,7 +91,7 @@ export const authSlice = createSlice({
         toast.success("User created successfully");
       })
       .addCase(signUpUser.rejected, (state, action) => {
-        state.loading = false;
+        state.fetchingUser = "rejected";
         state.error = action.payload;
       });
   },

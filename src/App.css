@@ -52,6 +52,7 @@
   flex-direction: column;
   overflow: hidden;
   width: 8rem;
+  z-index: 2;
 }
 
 .user-btn-wrapper:hover .user-wrapper {

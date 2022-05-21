@@ -1,21 +1,15 @@
 import React from "react";
 
-const Comment = () => {
+const Comment = ({ ...props }) => {
+  const { username, comment, profile_pic } = props;
   return (
     <li className="comment-wrapper">
       <span className="avatar avatar-round">
-        <img
-          className="responsive-img"
-          src="https://adaptiveui.netlify.app/src/assets/avatar-default.png"
-          alt="...."
-        />
+        <img className="responsive-img" src={profile_pic} alt="...." />
       </span>
       <div>
-        <span className="h5">@pankajw01</span>
-        <span className="comment">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quas
-          assumenda dolores, autem doloribus iusto!
-        </span>
+        <span className="h5">@{username}</span>
+        <span className="comment">{comment}</span>
       </div>
     </li>
   );

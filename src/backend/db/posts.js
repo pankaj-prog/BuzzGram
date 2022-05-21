@@ -27,7 +27,8 @@ export const posts = [
   },
   {
     _id: uuid(),
-    caption: "",
+    caption:
+      "All the statistics in the world can’t measure the warmth of a smile",
     image:
       "https://res.cloudinary.com/dl0nhw7w3/image/upload/v1653049103/smiling_face_wa6jy3.avif",
     likes: {
@@ -39,6 +40,24 @@ export const posts = [
     name: "Bhavika Tibrewal",
     username: "bhtibrewal",
     profile_pic: "https://avatars.githubusercontent.com/u/42600164?v=4",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+  },
+  {
+    _id: uuid(),
+    caption: "dummy post by guest user",
+    image:
+      "https://res.cloudinary.com/dl0nhw7w3/image/upload/v1653127504/z9patqzth1tv8bpmjijf.avif",
+    likes: {
+      likeCount: 0,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    comments: [],
+    name: "Guest User",
+    username: "guest_user",
+    profile_pic:
+      "https://res.cloudinary.com/dl0nhw7w3/image/upload/v1653049691/avatar-default_n2lxg6.png",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },

@@ -13,14 +13,19 @@ import {
   NewPost,
 } from "pages";
 
-import { UserRoutes, AuthRoutes } from "components";
+import { UserRoutes, AuthRoutes, EditPostModal } from "components";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import { getPosts } from "redux/reducers/postsSlice";
+import { getUsers } from "redux/reducers/usersSlice";
+import { useDispatch } from "react-redux";
 
 function App() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -29,12 +34,17 @@ function App() {
     }
   }, [pathname]);
 
+  useEffect(() => {
+    dispatch(getPosts());
+    dispatch(getUsers());
+  }, []);
+
   return (
     <>
       <Routes>
         <Route path="/" element={<UserRoutes />}>
           <Route path="home" element={<Home />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="profile/:username" element={<Profile />} />
           <Route path="explore" element={<Explore />} />
           <Route path="post/:postID" element={<PostPage />} />
           <Route path="newpost" element={<NewPost />} />
