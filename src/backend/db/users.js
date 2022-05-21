@@ -23,6 +23,20 @@ export const users = [
     name: "Guest User",
     username: "guest_user",
     password: "guest@123",
+    following: [
+      {
+        _id: uuid(),
+        name: "Pankaj Wadhwani",
+        username: "pankajw01",
+        password: "pankaj@123",
+        profile_pic:
+          "https://res.cloudinary.com/dl0nhw7w3/image/upload/v1653051231/210848174_242834254017914_6932774085704834398_n.jpg_sta2kz.jpg",
+        bio: "Frontend Develepor",
+        website: "",
+        createdAt: formatDate(),
+        updatedAt: formatDate(),
+      },
+    ],
     profile_pic:
       "https://res.cloudinary.com/dl0nhw7w3/image/upload/v1653049691/avatar-default_n2lxg6.png",
     bio: "hi, I am guest user.",

@@ -69,7 +69,7 @@ const Post = ({ ...params }) => {
               <span className="text-muted text-sm">@{username}</span>
             </div>
           </div>
-          {username == currentUser.username ? (
+          {username == currentUser.username && (
             <div className="post-actions-wrapper">
               <IconButton
                 clickHandler={() => setShowEditPostModal(true)}
@@ -80,8 +80,6 @@ const Post = ({ ...params }) => {
                 icon={<AiOutlineDelete />}
               />
             </div>
-          ) : (
-            <button className="btn">follow +</button>
           )}
         </header>
         <section className="img-wrapper ">

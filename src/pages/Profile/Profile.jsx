@@ -6,10 +6,12 @@ import { getUser } from "services/user/getUser";
 import { useParams } from "react-router-dom";
 import { getUserPosts } from "services";
 import { getBookmarks } from "redux/reducers/postsSlice";
+import { followUser, unfollowUser } from "redux/reducers/usersSlice";
 
 const Profile = () => {
   const [currentProfileUser, setCurrentProfileUser] = useState(null);
   const [selectedTab, setSelectedTab] = useState("posts");
+  const { users } = useSelector((state) => state.users);
   const { posts, fetchingPosts, bookmarks } = useSelector(
     (state) => state.posts
   );
@@ -22,7 +24,7 @@ const Profile = () => {
     if (username) {
       getUser({ username, setCurrentProfileUser });
     }
-  }, [username]);
+  }, [users, username]);
 
   useEffect(() => {
     dispatch(getBookmarks());
@@ -32,6 +34,10 @@ const Profile = () => {
   if (fetchingPosts == "fulfilled" && currentProfileUser) {
     userPosts = getUserPosts({ username: currentProfileUser.username, posts });
   }
+
+  const isFollowing = currentProfileUser?.followers.some(
+    (item) => item.username === user?.username
+  );
 
   return currentProfileUser ? (
     <>
@@ -53,8 +59,30 @@ const Profile = () => {
                 >
                   Edit Profile
                 </button>
+              ) : isFollowing ? (
+                <button
+                  className="btn btn-solid-secondary btn-rc"
+                  onClick={() =>
+                    dispatch(
+                      unfollowUser({
+                        followUserId: currentProfileUser._id,
+                      })
+                    )
+                  }
+                >
+                  Unfollow
+                </button>
               ) : (
-                <button className="btn btn-solid-secondary btn-rc">
+                <button
+                  className="btn btn-solid-secondary btn-rc"
+                  onClick={() =>
+                    dispatch(
+                      followUser({
+                        followUserId: currentProfileUser._id,
+                      })
+                    )
+                  }
+                >
                   Follow
                 </button>
               )}
