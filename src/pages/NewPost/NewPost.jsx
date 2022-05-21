@@ -45,6 +45,7 @@ const NewPost = () => {
         image: imgUrl,
       })
     );
+    setSelectedImage(null);
     setCaption("");
     setImgUrl(null);
     navigate("/home");

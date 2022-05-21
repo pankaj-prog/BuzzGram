@@ -43,4 +43,22 @@ export const posts = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
+  {
+    _id: uuid(),
+    caption: "dummy post by guest user",
+    image:
+      "https://res.cloudinary.com/dl0nhw7w3/image/upload/v1653127504/z9patqzth1tv8bpmjijf.avif",
+    likes: {
+      likeCount: 0,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    comments: [],
+    name: "Guest User",
+    username: "guest_user",
+    profile_pic:
+      "https://res.cloudinary.com/dl0nhw7w3/image/upload/v1653049691/avatar-default_n2lxg6.png",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+  },
 ];

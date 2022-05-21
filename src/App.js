@@ -13,7 +13,7 @@ import {
   NewPost,
 } from "pages";
 
-import { UserRoutes, AuthRoutes } from "components";
+import { UserRoutes, AuthRoutes, EditPostModal } from "components";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";

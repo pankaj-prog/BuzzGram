@@ -17,7 +17,7 @@ const Home = () => {
       <div className="posts-wrapper">
         {fetchingPosts == "fulfilled" &&
           (posts?.length > 0 ? (
-            posts.map((post) => <Post {...post} />)
+            posts.map((post) => <Post key={post._id} {...post} />)
           ) : (
             <p className="text-center">No posts to show</p>
           ))}

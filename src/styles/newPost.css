@@ -29,3 +29,9 @@
 .caption-input::-webkit-scrollbar {
   display: none;
 }
+
+.new-post-wrapper.modal {
+  max-width: 30rem;
+  max-height: 100%;
+  overflow: scroll;
+}
