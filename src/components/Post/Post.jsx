@@ -29,7 +29,7 @@ const Post = ({ ...params }) => {
     profile_pic,
     likes: { likeCount, likedBy },
     comments,
-    id,
+    _id,
   } = params;
 
   const { user: currentUser } = useSelector((state) => state.auth);
@@ -86,7 +86,7 @@ const Post = ({ ...params }) => {
         </header>
         <section className="img-wrapper ">
           <img
-            onClick={() => navigate(`/post/${id}`)}
+            onClick={() => navigate(`/post/${_id}`)}
             cursor="pointer"
             className="post-img"
             src={image}
@@ -109,7 +109,7 @@ const Post = ({ ...params }) => {
             )}
             <IconButton
               icon={<AiOutlineComment />}
-              clickHandler={() => navigate(`/post/${id}`)}
+              clickHandler={() => navigate(`/post/${_id}`)}
             />
             {isBookmarked ? (
               <IconButton
@@ -129,7 +129,7 @@ const Post = ({ ...params }) => {
           <p className="gutter-bottom-8 caption">{caption}</p>
           {!(currLocation.pathname == "/post/:postID") && (
             <button
-              onClick={() => navigate(`/post/${id}`)}
+              onClick={() => navigate(`/post/${_id}`)}
               className="text-muted btn fw-r"
             >
               View all {comments.length} comments

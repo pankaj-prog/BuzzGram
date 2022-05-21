@@ -348,6 +348,7 @@ export const deleteCommentHandler = function (schema, request) {
       );
     }
     const { postId, commentId } = request.params;
+    console.log(postId, commentId);
     let post = schema.posts.findBy({ _id: postId }).attrs;
     const updatedComments = post.comments.filter(
       (comment) => comment._id !== commentId

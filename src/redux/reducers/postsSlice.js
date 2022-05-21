@@ -113,10 +113,10 @@ export const getBookmarks = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const encodedToken = localStorage.getItem("buzzgram-token");
-      const response = await axios.get("/api/users/bookmark", {
+      const { data } = await axios.get("/api/users/bookmark", {
         headers: { authorization: encodedToken },
       });
-      return response.data;
+      return data;
     } catch (error) {
       return rejectWithValue(`${error.response.data.errors}`);
     }
@@ -152,6 +152,25 @@ export const removeFromBookmarks = createAsyncThunk(
       );
       return data;
     } catch (error) {
+      return rejectWithValue(`${error.response.data.errors}`);
+    }
+  }
+);
+
+export const postComment = createAsyncThunk(
+  "posts/postComment",
+  async ({ postId, comment }, { rejectWithValue }) => {
+    try {
+      const encodedToken = localStorage.getItem("buzzgram-token");
+      const { data } = await axios.post(
+        `/api/posts/comments/${postId}`,
+        { comment },
+        { headers: { authorization: encodedToken } }
+      );
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error.response);
       return rejectWithValue(`${error.response.data.errors}`);
     }
   }
@@ -233,6 +252,12 @@ const postsSlice = createSlice({
         state.bookmarks = action.payload.bookmarks;
       })
       .addCase(removeFromBookmarks.rejected, (state, action) => {
+        toast.error(action.payload);
+      })
+      .addCase(postComment.fulfilled, (state, action) => {
+        state.posts = action.payload.posts;
+      })
+      .addCase(postComment.rejected, (state, action) => {
         toast.error(action.payload);
       });
   },
