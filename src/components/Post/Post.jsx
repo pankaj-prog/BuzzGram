@@ -8,8 +8,9 @@ import {
   AiOutlineDelete,
 } from "assets/icons";
 import { IconButton } from "components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { EditPostModal } from "components";
+import { deletePost } from "redux/reducers/postsSlice";
 
 const Post = ({ ...params }) => {
   const { image, caption, name, username, profile_pic, likes, comments, id } =
@@ -18,6 +19,11 @@ const Post = ({ ...params }) => {
   const [showEditPostModal, setShowEditPostModal] = useState(false);
   const navigate = useNavigate();
   const currLocation = useLocation();
+  const dispatch = useDispatch();
+
+  const deletePostHandler = () => {
+    dispatch(deletePost(params._id));
+  };
 
   return (
     <>
@@ -45,7 +51,10 @@ const Post = ({ ...params }) => {
                 clickHandler={() => setShowEditPostModal(true)}
                 icon={<AiOutlineEdit />}
               />
-              <IconButton icon={<AiOutlineDelete />} />
+              <IconButton
+                clickHandler={() => deletePostHandler()}
+                icon={<AiOutlineDelete />}
+              />
             </div>
           ) : (
             <button className="btn">follow +</button>

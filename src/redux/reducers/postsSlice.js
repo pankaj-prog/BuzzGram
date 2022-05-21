@@ -54,6 +54,22 @@ export const editPost = createAsyncThunk(
   }
 );
 
+export const deletePost = createAsyncThunk(
+  "post/delete",
+  async (postID, { rejectWithValue }) => {
+    try {
+      const encodedToken = localStorage.getItem("buzzgram-token");
+      const { data } = await axios.delete(`/api/posts/${postID}`, {
+        headers: { authorization: encodedToken },
+      });
+      return data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(`${error.response.data.errors}`);
+    }
+  }
+);
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -93,6 +109,13 @@ const postsSlice = createSlice({
       })
       .addCase(editPost.rejected, (state, action) => {
         state.fetchingPosts = "rejected";
+        toast.error(action.payload);
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        toast.success("Post Deleted");
+        state.posts = action.payload.posts;
+      })
+      .addCase(deletePost.rejected, (state, action) => {
         toast.error(action.payload);
       });
   },
