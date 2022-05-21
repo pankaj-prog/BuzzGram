@@ -109,3 +109,15 @@ body {
 .border-all-thin {
   border: 1px solid var(--COLOR-SECONDARY-V3);
 }
+
+/* modal */
+
+.modal-wrapper {
+  backdrop-filter: blur(4px) brightness(60%);
+  display: flex;
+  left: 0;
+}
+
+.modal {
+  max-width: 23rem;
+}

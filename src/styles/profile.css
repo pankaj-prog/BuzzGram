@@ -35,3 +35,17 @@
 .post-type-selected {
   border-top: 3px solid var(--COLOR-PRIMARY);
 }
+
+/*edit profile form  */
+
+.edit-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.edit-profile-input {
+  padding: 4px;
+  display: block;
+  width: 100%;
+}

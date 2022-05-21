@@ -6,11 +6,13 @@ import {
   MdOutlineExplore,
   AiOutlineUser,
 } from "assets/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "redux/reducers/authSlice";
 
 const Header = () => {
   const [showUserWrapper, setShowUserWrapper] = useState();
+
+  const { user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const logoutHandler = () => {
@@ -18,6 +20,7 @@ const Header = () => {
   };
 
   const navigate = useNavigate();
+
   return (
     <div className="app-header-wrapper gutter-bottom-24">
       <header className="app-header">
@@ -40,7 +43,10 @@ const Header = () => {
               <AiOutlineUser />
             </button>
             <div className="user-wrapper">
-              <button className="btn" onClick={() => navigate("/profile")}>
+              <button
+                className="btn"
+                onClick={() => navigate(`/profile/${user?.username}`)}
+              >
                 My profile
               </button>
               <button className="btn" onClick={logoutHandler}>
