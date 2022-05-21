@@ -58,15 +58,13 @@ export const updateUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const encodedToken = localStorage.getItem("buzzgram-token");
-      const response = await axios.post(
+      const { data } = await axios.post(
         "/api/users/edit",
         { userData },
         { headers: { authorization: encodedToken } }
       );
-      console.log(response);
-      return response.data;
+      return data;
     } catch (error) {
-      console.log(error.response);
       return rejectWithValue(`${error.response.data.errors}`);
     }
   }
@@ -90,7 +88,6 @@ const usersSlice = createSlice({
         toast.error(action.payload);
       })
       .addCase(followUser.fulfilled, (state, action) => {
-        console.log("fulfilled", action.payload);
         const { user, followUser } = action.payload;
         state.users = state.users.map((item) =>
           item.username === user.username ? user : item

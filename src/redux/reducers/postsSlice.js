@@ -167,10 +167,8 @@ export const postComment = createAsyncThunk(
         { comment },
         { headers: { authorization: encodedToken } }
       );
-      console.log(data);
       return data;
     } catch (error) {
-      console.log(error.response);
       return rejectWithValue(`${error.response.data.errors}`);
     }
   }
