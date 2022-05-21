@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createPost } from "redux/reducers/postsSlice";
 
-const fileTypes = ["JPEG", "PNG", "GIF"];
+const fileTypes = ["JPEG", "PNG", "GIF", "JPG"];
 
 const NewPost = () => {
   const [caption, setCaption] = useState("");

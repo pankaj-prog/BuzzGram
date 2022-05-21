@@ -7,11 +7,18 @@ import {
   AiOutlineEdit,
   AiOutlineDelete,
   AiFillHeart,
+  FaBookmark,
 } from "assets/icons";
 import { IconButton } from "components";
 import { useDispatch, useSelector } from "react-redux";
 import { EditPostModal } from "components";
-import { deletePost, dislikePost, likePost } from "redux/reducers/postsSlice";
+import {
+  addToBookmarks,
+  deletePost,
+  dislikePost,
+  likePost,
+  removeFromBookmarks,
+} from "redux/reducers/postsSlice";
 
 const Post = ({ ...params }) => {
   const {
@@ -26,16 +33,17 @@ const Post = ({ ...params }) => {
   } = params;
 
   const { user: currentUser } = useSelector((state) => state.auth);
+  const { bookmarks } = useSelector((state) => state.posts);
   const [showEditPostModal, setShowEditPostModal] = useState(false);
   const navigate = useNavigate();
   const currLocation = useLocation();
   const dispatch = useDispatch();
 
-  console.log(likedBy);
-
   const isLiked = likedBy.some((user) => {
     return user.username == currentUser.username;
   });
+
+  const isBookmarked = bookmarks.some((id) => id == params._id);
 
   const deletePostHandler = () => {
     dispatch(deletePost(params._id));
@@ -103,7 +111,17 @@ const Post = ({ ...params }) => {
               icon={<AiOutlineComment />}
               clickHandler={() => navigate(`/post/${id}`)}
             />
-            <IconButton icon={<FiBookmark />} />
+            {isBookmarked ? (
+              <IconButton
+                icon={<FaBookmark />}
+                clickHandler={() => dispatch(removeFromBookmarks(params._id))}
+              />
+            ) : (
+              <IconButton
+                icon={<FiBookmark />}
+                clickHandler={() => dispatch(addToBookmarks(params._id))}
+              />
+            )}
           </div>
         </section>
         <section className="post-content">

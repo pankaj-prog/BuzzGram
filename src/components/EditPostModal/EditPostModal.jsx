@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FileUploader } from "react-drag-drop-files";
 import { editPost } from "redux/reducers/postsSlice";
 
-const fileTypes = ["JPEG", "PNG", "GIF"];
+const fileTypes = ["JPEG", "PNG", "GIF", "JPG"];
 
 const EditPostModal = ({
   postID,

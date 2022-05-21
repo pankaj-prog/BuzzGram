@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 const initialState = {
   posts: [],
+  bookmarks: [],
   fetchingPosts: "idle",
 };
 
@@ -74,7 +75,6 @@ export const likePost = createAsyncThunk(
   async (postId, { rejectWithValue }) => {
     try {
       const encodedToken = localStorage.getItem("buzzgram-token");
-      console.log("like post", postId, "encodedTOken", encodedToken);
       const { data } = await axios.post(
         `/api/posts/like/${postId}`,
         {},
@@ -84,7 +84,6 @@ export const likePost = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      console.log("like error", error.response);
       return rejectWithValue(`${error.response.data.errors}`);
     }
   }
@@ -104,7 +103,55 @@ export const dislikePost = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      console.log(error.response);
+      return rejectWithValue(`${error.response.data.errors}`);
+    }
+  }
+);
+
+export const getBookmarks = createAsyncThunk(
+  "posts/getBookmarks",
+  async (_, { rejectWithValue }) => {
+    try {
+      const encodedToken = localStorage.getItem("buzzgram-token");
+      const response = await axios.get("/api/users/bookmark", {
+        headers: { authorization: encodedToken },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(`${error.response.data.errors}`);
+    }
+  }
+);
+
+export const addToBookmarks = createAsyncThunk(
+  "posts/addToBookmarks",
+  async (postId, { rejectWithValue }) => {
+    try {
+      const encodedToken = localStorage.getItem("buzzgram-token");
+      const { data } = await axios.post(
+        `/api/users/bookmark/${postId}`,
+        {},
+        { headers: { authorization: encodedToken } }
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(`${error.response.data.errors}`);
+    }
+  }
+);
+
+export const removeFromBookmarks = createAsyncThunk(
+  "posts/removeFromBookmarks",
+  async (postId, { rejectWithValue }) => {
+    try {
+      const encodedToken = localStorage.getItem("buzzgram-token");
+      const { data } = await axios.post(
+        `api/users/remove-bookmark/${postId}`,
+        {},
+        { headers: { authorization: encodedToken } }
+      );
+      return data;
+    } catch (error) {
       return rejectWithValue(`${error.response.data.errors}`);
     }
   }
@@ -168,6 +215,24 @@ const postsSlice = createSlice({
         state.posts = action.payload.posts;
       })
       .addCase(dislikePost.rejected, (state, action) => {
+        toast.error(action.payload);
+      })
+      .addCase(getBookmarks.fulfilled, (state, action) => {
+        state.bookmarks = action.payload.bookmarks;
+      })
+      .addCase(getBookmarks.rejected, (state, action) => {
+        toast.error(action.payload);
+      })
+      .addCase(addToBookmarks.fulfilled, (state, action) => {
+        state.bookmarks = action.payload.bookmarks;
+      })
+      .addCase(addToBookmarks.rejected, (state, action) => {
+        toast.error(action.payload);
+      })
+      .addCase(removeFromBookmarks.fulfilled, (state, action) => {
+        state.bookmarks = action.payload.bookmarks;
+      })
+      .addCase(removeFromBookmarks.rejected, (state, action) => {
         toast.error(action.payload);
       });
   },
