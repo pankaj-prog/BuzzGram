@@ -6,20 +6,36 @@ import {
   FiBookmark,
   AiOutlineEdit,
   AiOutlineDelete,
+  AiFillHeart,
 } from "assets/icons";
 import { IconButton } from "components";
 import { useDispatch, useSelector } from "react-redux";
 import { EditPostModal } from "components";
-import { deletePost } from "redux/reducers/postsSlice";
+import { deletePost, dislikePost, likePost } from "redux/reducers/postsSlice";
 
 const Post = ({ ...params }) => {
-  const { image, caption, name, username, profile_pic, likes, comments, id } =
-    params;
-  const { user } = useSelector((state) => state.auth);
+  const {
+    image,
+    caption,
+    name,
+    username,
+    profile_pic,
+    likes: { likeCount, likedBy },
+    comments,
+    id,
+  } = params;
+
+  const { user: currentUser } = useSelector((state) => state.auth);
   const [showEditPostModal, setShowEditPostModal] = useState(false);
   const navigate = useNavigate();
   const currLocation = useLocation();
   const dispatch = useDispatch();
+
+  console.log(likedBy);
+
+  const isLiked = likedBy.some((user) => {
+    return user.username == currentUser.username;
+  });
 
   const deletePostHandler = () => {
     dispatch(deletePost(params._id));
@@ -45,7 +61,7 @@ const Post = ({ ...params }) => {
               <span className="text-muted text-sm">@{username}</span>
             </div>
           </div>
-          {username == user.username ? (
+          {username == currentUser.username ? (
             <div className="post-actions-wrapper">
               <IconButton
                 clickHandler={() => setShowEditPostModal(true)}
@@ -70,9 +86,19 @@ const Post = ({ ...params }) => {
           />
         </section>
         <section className="post-status-bar">
-          <span>{likes?.likeCount} Likes</span>
+          <span>{likeCount} Likes</span>
           <div className="post-actions-wrapper">
-            <IconButton icon={<AiOutlineHeart />} />
+            {isLiked ? (
+              <IconButton
+                icon={<AiFillHeart />}
+                clickHandler={() => dispatch(dislikePost(params._id))}
+              />
+            ) : (
+              <IconButton
+                icon={<AiOutlineHeart />}
+                clickHandler={() => dispatch(likePost(params._id))}
+              />
+            )}
             <IconButton
               icon={<AiOutlineComment />}
               clickHandler={() => navigate(`/post/${id}`)}

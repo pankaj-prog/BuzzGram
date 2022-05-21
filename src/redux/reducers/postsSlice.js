@@ -64,7 +64,47 @@ export const deletePost = createAsyncThunk(
       });
       return data;
     } catch (error) {
-      console.log(error);
+      return rejectWithValue(`${error.response.data.errors}`);
+    }
+  }
+);
+
+export const likePost = createAsyncThunk(
+  "posts/like",
+  async (postId, { rejectWithValue }) => {
+    try {
+      const encodedToken = localStorage.getItem("buzzgram-token");
+      console.log("like post", postId, "encodedTOken", encodedToken);
+      const { data } = await axios.post(
+        `/api/posts/like/${postId}`,
+        {},
+        {
+          headers: { authorization: encodedToken },
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log("like error", error.response);
+      return rejectWithValue(`${error.response.data.errors}`);
+    }
+  }
+);
+
+export const dislikePost = createAsyncThunk(
+  "posts/dislike",
+  async (postId, { rejectWithValue }) => {
+    try {
+      const encodedToken = localStorage.getItem("buzzgram-token");
+      const { data } = await axios.post(
+        `/api/posts/dislike/${postId}`,
+        {},
+        {
+          headers: { authorization: encodedToken },
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log(error.response);
       return rejectWithValue(`${error.response.data.errors}`);
     }
   }
@@ -116,6 +156,18 @@ const postsSlice = createSlice({
         state.posts = action.payload.posts;
       })
       .addCase(deletePost.rejected, (state, action) => {
+        toast.error(action.payload);
+      })
+      .addCase(likePost.fulfilled, (state, action) => {
+        state.posts = action.payload.posts;
+      })
+      .addCase(likePost.rejected, (state, action) => {
+        toast.error(action.payload);
+      })
+      .addCase(dislikePost.fulfilled, (state, action) => {
+        state.posts = action.payload.posts;
+      })
+      .addCase(dislikePost.rejected, (state, action) => {
         toast.error(action.payload);
       });
   },
