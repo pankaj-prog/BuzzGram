@@ -30,7 +30,7 @@ const Profile = () => {
     dispatch(getBookmarks());
   }, []);
 
-  let userPosts;
+  let userPosts = [];
   if (fetchingPosts == "fulfilled" && currentProfileUser) {
     userPosts = getUserPosts({ username: currentProfileUser.username, posts });
   }
@@ -97,7 +97,7 @@ const Profile = () => {
               </a>
             </p>
             <div className="user-info">
-              <span className="fw-b text-center">2 posts</span>
+              <span className="fw-b text-center">{userPosts.length} posts</span>
               <span className="fw-b text-center">
                 {currentProfileUser.followers.length} followers
               </span>
@@ -140,7 +140,6 @@ const Profile = () => {
           ) : (
             <p className="text-center">No posts to show</p>
           ))}
-
         {selectedTab == "bookmarks" &&
           (bookmarks.length > 0 ? (
             posts

@@ -19,12 +19,10 @@ const Home = () => {
         // sort by recent
         return new Date(b.createdAt) - new Date(a.createdAt);
       } else {
-        return a.likes.likeCount - b.likes.likeCount;
+        return b.likes.likeCount - a.likes.likeCount;
       }
-    } else return a.comments.length - b.comments.length;
+    } else return b.comments.length - a.comments.length;
   };
-
-  console.log(users);
 
   let followingUsersUsernames;
   let userSpecificPosts;

@@ -47,8 +47,8 @@
   border-radius: 1rem;
   background-color: var(--COLOR-SECONDARY);
   box-shadow: 0 0 6px -2px var(--COLOR-PRIMARY-V3);
-  top: 2rem;
-  right: 0;
+  top: 1.85rem;
+  right: -2px;
   flex-direction: column;
   overflow: hidden;
   width: 8rem;
