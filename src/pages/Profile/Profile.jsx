@@ -151,7 +151,10 @@ const Profile = () => {
           ))}
       </section>
       {showEditProfileModal && (
-        <EditProfileModal setShowEditProfileModal={setShowEditProfileModal} />
+        <EditProfileModal
+          setShowEditProfileModal={setShowEditProfileModal}
+          currentProfileUser={currentProfileUser}
+        />
       )}
     </>
   ) : (

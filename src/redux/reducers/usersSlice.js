@@ -53,6 +53,25 @@ export const unfollowUser = createAsyncThunk(
   }
 );
 
+export const updateUser = createAsyncThunk(
+  "users/updateUser",
+  async (userData, { rejectWithValue }) => {
+    try {
+      const encodedToken = localStorage.getItem("buzzgram-token");
+      const response = await axios.post(
+        "/api/users/edit",
+        { userData },
+        { headers: { authorization: encodedToken } }
+      );
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error.response);
+      return rejectWithValue(`${error.response.data.errors}`);
+    }
+  }
+);
+
 const usersSlice = createSlice({
   name: "users",
   initialState,
@@ -89,6 +108,16 @@ const usersSlice = createSlice({
         state.users = state.users.map((item) =>
           item.username === followUser.username ? followUser : item
         );
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.users = state.users.map((user) =>
+          user.username === action.payload.user.username
+            ? action.payload.user
+            : user
+        );
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        toast.error(action.payload);
       });
   },
 });
