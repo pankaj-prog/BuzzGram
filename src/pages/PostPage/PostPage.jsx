@@ -1,17 +1,32 @@
 import { Post, Comment } from "components";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { postComment } from "redux/reducers/postsSlice";
 
 const PostPage = () => {
   const { postID } = useParams();
   const { posts } = useSelector((state) => state.posts);
   const [currentPost, setCurrentPost] = useState(null);
+  const commentRef = useRef();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const foundPost = posts?.find((post) => post.id === postID);
+    const foundPost = posts?.find((post) => post._id === postID);
     setCurrentPost(foundPost);
   }, [posts]);
+
+  const commentHandler = () => {
+    if (commentRef.current.value.trim() == "") {
+      toast.error("comment should not be empty");
+    } else {
+      dispatch(
+        postComment({ postId: postID, comment: commentRef.current.value })
+      );
+      commentRef.current.value = "";
+    }
+  };
 
   return currentPost ? (
     <>
@@ -20,14 +35,22 @@ const PostPage = () => {
         <div className="comment-input-wrapper">
           <input
             type="text"
+            ref={commentRef}
             className="comment-input"
             placeholder="Enter your comment..."
           />
-          <button className="btn btn-rc btn-solid-primary">Comment</button>
+          <button
+            className="btn btn-rc btn-solid-primary"
+            onClick={commentHandler}
+          >
+            Comment
+          </button>
         </div>
         <ul className="comments-list-wrapper">
           {currentPost.comments.length > 0 &&
-            currentPost.comments.map((comment) => <Comment {...comment} />)}
+            currentPost.comments.map((comment) => (
+              <Comment key={comment._id} {...comment} />
+            ))}
         </ul>
       </section>
     </>

@@ -1,2 +1,2 @@
 export { getUser } from "./user/getUser";
-export { getUserPosts } from "./user/getUserPosts";
+export { getUserPosts } from "./posts/getUserPosts";

@@ -7,11 +7,18 @@ import {
   AiOutlineEdit,
   AiOutlineDelete,
   AiFillHeart,
+  FaBookmark,
 } from "assets/icons";
 import { IconButton } from "components";
 import { useDispatch, useSelector } from "react-redux";
 import { EditPostModal } from "components";
-import { deletePost, dislikePost, likePost } from "redux/reducers/postsSlice";
+import {
+  addToBookmarks,
+  deletePost,
+  dislikePost,
+  likePost,
+  removeFromBookmarks,
+} from "redux/reducers/postsSlice";
 
 const Post = ({ ...params }) => {
   const {
@@ -22,20 +29,21 @@ const Post = ({ ...params }) => {
     profile_pic,
     likes: { likeCount, likedBy },
     comments,
-    id,
+    _id,
   } = params;
 
   const { user: currentUser } = useSelector((state) => state.auth);
+  const { bookmarks } = useSelector((state) => state.posts);
   const [showEditPostModal, setShowEditPostModal] = useState(false);
   const navigate = useNavigate();
   const currLocation = useLocation();
   const dispatch = useDispatch();
 
-  console.log(likedBy);
-
   const isLiked = likedBy.some((user) => {
     return user.username == currentUser.username;
   });
+
+  const isBookmarked = bookmarks.some((id) => id == params._id);
 
   const deletePostHandler = () => {
     dispatch(deletePost(params._id));
@@ -61,7 +69,7 @@ const Post = ({ ...params }) => {
               <span className="text-muted text-sm">@{username}</span>
             </div>
           </div>
-          {username == currentUser.username ? (
+          {username == currentUser.username && (
             <div className="post-actions-wrapper">
               <IconButton
                 clickHandler={() => setShowEditPostModal(true)}
@@ -72,13 +80,11 @@ const Post = ({ ...params }) => {
                 icon={<AiOutlineDelete />}
               />
             </div>
-          ) : (
-            <button className="btn">follow +</button>
           )}
         </header>
         <section className="img-wrapper ">
           <img
-            onClick={() => navigate(`/post/${id}`)}
+            onClick={() => navigate(`/post/${_id}`)}
             cursor="pointer"
             className="post-img"
             src={image}
@@ -101,9 +107,19 @@ const Post = ({ ...params }) => {
             )}
             <IconButton
               icon={<AiOutlineComment />}
-              clickHandler={() => navigate(`/post/${id}`)}
+              clickHandler={() => navigate(`/post/${_id}`)}
             />
-            <IconButton icon={<FiBookmark />} />
+            {isBookmarked ? (
+              <IconButton
+                icon={<FaBookmark />}
+                clickHandler={() => dispatch(removeFromBookmarks(params._id))}
+              />
+            ) : (
+              <IconButton
+                icon={<FiBookmark />}
+                clickHandler={() => dispatch(addToBookmarks(params._id))}
+              />
+            )}
           </div>
         </section>
         <section className="post-content">
@@ -111,7 +127,7 @@ const Post = ({ ...params }) => {
           <p className="gutter-bottom-8 caption">{caption}</p>
           {!(currLocation.pathname == "/post/:postID") && (
             <button
-              onClick={() => navigate(`/post/${id}`)}
+              onClick={() => navigate(`/post/${_id}`)}
               className="text-muted btn fw-r"
             >
               View all {comments.length} comments
