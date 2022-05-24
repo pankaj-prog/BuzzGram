@@ -7,8 +7,8 @@ Buzzgram is a social media app
 https://buzzgram.netlify.app/
 
 ### Tech Stack
-ReactJS
-Redux toolkit
+- ReactJS
+- Redux toolkit
 
 ### Features
 - authentication
