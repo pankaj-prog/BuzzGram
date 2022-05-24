@@ -15,3 +15,5 @@ Redux toolkit
 - follow or unfollow people
 - like comment or bookmark the posts
 - user feed with sort types and explore feed 
+- edit user profile 
+- edit or delete your post
